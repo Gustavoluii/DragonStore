@@ -7,6 +7,14 @@ const LOGO = "https://i.imgur.com/Hk5HzH5.png";
 
 bot.login(process.env.BOT_TOKEN);
 
+bot.on('ready', () => {
+    bot.user.setGame(`dragoncss.com`);
+});
+
+bot.on("ready", function() {
+    console.log("Estou online!");
+});
+
 bot.on('message', function (message) {
     var achar = fila.indexOf(message.author.id)
     if (achar >= 0 ) return
@@ -17,18 +25,7 @@ bot.on('message', function (message) {
     if (achar2 == null ) return
     fila.splice(achar2,1)
     },3000)
-
-}});
-
-bot.on('ready', () => {
-    bot.user.setGame(`dragoncss.com`);
-});
-
-bot.on("ready", function() {
-    console.log("Estou online!");
-});
-
-bot.on('message', function (message) {
+}
     if (message.author.bot) return;
 	if (!message.content.startsWith(prefix)) return;
 	
