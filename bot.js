@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 
 const prefix = "!";
-const LOGO = "https://i.imgur.com/MIsdtgv.png";
+const LOGO = "https://i.imgur.com/Hk5HzH5.png";
 
 bot.login(process.env.BOT_TOKEN);
 
