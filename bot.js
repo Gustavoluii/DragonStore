@@ -7,8 +7,8 @@ const LOGO = "https://i.imgur.com/Hk5HzH5.png";
 
 bot.login(process.env.BOT_TOKEN);
 
-bot.on('ready', () => {
-    bot.user.setGame(`dragoncss.com`);
+bot.on("ready", () => {
+    bot.user.setGame("dragoncss.com")
 });
 
 bot.on("ready", function() {
