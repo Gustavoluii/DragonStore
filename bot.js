@@ -1,3 +1,4 @@
+var fila = []
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
@@ -5,6 +6,19 @@ const prefix = "!";
 const LOGO = "https://i.imgur.com/Hk5HzH5.png";
 
 bot.login(process.env.BOT_TOKEN);
+
+bot.on('message', function (message) {
+    var achar = fila.indexOf(message.author.id)
+    if (achar >= 0 ) return
+    else if (0 >= achar){
+    fila.push(message.author.id)
+    setTimeout(() =>{
+    var achar2 = fila.indexOf(message.author.id)
+    if (achar2 == null ) return
+    fila.splice(achar2,1)
+    },3000)
+
+}});
 
 bot.on('ready', () => {
     bot.user.setGame(`dragoncss.com`);
