@@ -64,6 +64,39 @@ bot.on("message", async message => {
     let messageArray = message.content.split(" ");
     let cmd = messageArray[0];
     let args = messageArray.slice(1);
+	
+    if(cmd === `${prefix}mute`){
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sendMessage("❌ | Você não tem permissão!")
+    
+    let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+    if(!toMute) return message.channel.sendMessage("Você não especificou o membro.");
+
+    let role = message.guild.roles.find(r => r.name === "🔇 Mutado");
+    if(!role) {
+      try{
+        role = await message.guild.createRole({
+          name: "🔇 Mutado",
+          color: "#030303",
+          permissions: []
+        });
+
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(role, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+           });
+        });
+      } catch(e) {
+          console.log(e.stack);
+      }
+    }
+  if(toMute.roles.has(role.id)) return message.channel.sendMessage("Membro mutado com sucesso.");
+  
+  await toMute.addRole(role);
+  message.channel.sendMessage("🔇 | Membro Mutado!");
+  
+    return;
+}
   
     if(cmd === `${prefix}ban`){
   
