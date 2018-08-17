@@ -71,11 +71,11 @@ bot.on("message", async message => {
     let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     if(!toMute) return message.channel.sendMessage("Você não especificou o membro.");
 
-    let role = message.guild.roles.find(r => r.name === "🔇 Mutado");
+    let role = message.guild.roles.find(r => r.name === "Mutado");
     if(!role) {
       try{
         role = await message.guild.createRole({
-          name: "🔇 Mutado",
+          name: "Mutado",
           color: "#030303",
           permissions: []
         });
@@ -93,7 +93,7 @@ bot.on("message", async message => {
   if(toMute.roles.has(role.id)) return message.channel.sendMessage("Membro mutado com sucesso.");
   
   await toMute.addRole(role);
-  message.channel.sendMessage("🔇 | Membro Mutado!");
+  message.channel.sendMessage("Membro Mutado!");
   
     return;
 }
