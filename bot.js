@@ -204,9 +204,9 @@ bot.on("message", async message => {
       if(cmd === `${prefix}loja`){
           let lojaembed = new Discord.RichEmbed()
           .setAuthor("DragonStore - Loja", LOGO)
-          .setDescription("❌ | Site em manutenção! para fazer a compra chame o **@dragon#7632** no Privado.")
-          //.setTitle(`Clique aqui para acessar a loja! :moneybag:`)
-         // .setURL("https://dragoncss.com")
+          //.setDescription("❌ | Site em manutenção! para fazer a compra chame o **@dragon#7632** no Privado.")
+            .setTitle(`Clique aqui para acessar a loja! :moneybag:`)
+            .setURL("https://dragoncss.com")
           .setColor("#FFBF00");
           message.channel.sendEmbed(lojaembed);
       }
@@ -214,7 +214,7 @@ bot.on("message", async message => {
       if(cmd === `${prefix}produtos`){
           let produtosembed = new Discord.RichEmbed()
           .setAuthor("DragonStore - Produtos", LOGO)
-          .addField("Produtos e Preços", "\nMinecraft Full Acesso: **R$14,99**\nCapa da Optifine: **R$20**\nConta Alternativa: **R$1,50**\n")
+          .addField("Produtos e Preços", "\nMinecraft Full Acesso: **R$14,99**\nCapa da Optifine: **R$23,90**\nConta Alternativa: **R$1,50**\n")
           .setFooter("Para mais informações acesse dragoncss.com ou #produtos.")
           .setColor("#FFBF00");
           message.channel.sendEmbed(produtosembed);
