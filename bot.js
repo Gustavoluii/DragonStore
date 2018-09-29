@@ -21,55 +21,65 @@ bot.on("message", async message => {
     if(message.channel.type === "dm") return;
 
     let prefix = PREFIX
+    let messageArray = message.content.split(" ");
+    let cmd = messageArray[0];
+    let args = messageArray.slice(1);
+
+if (message.content.includes("https://discord.gg/")) {
+    if (!message.member.hasPermission("ADMINISTRATOR")) {
+        message.delete();
+        message.reply("Você não pode enviar link de outros grupos aqui.");
+    }
+
+}
+
+if (message.content === `<@${bot.user.id}>`) {
+    message.channel.send("https://mineluii.com");
+}
+});
+
+bot.on("message", async message => {
+    if(message.author.bot) return;
+    if(message.channel.type === "dm") return;
+
+    let prefix = PREFIX
     if(message.content.startsWith(prefix)){
     let messageArray = message.content.split(" ");
     let cmd = messageArray[0];
     let args = messageArray.slice(1);
 
-    if (message.content === `<@${bot.user.id}>`) {
-        message.channel.send("Olá");
-    }
-        
-    if (message.content.includes("https://discord.gg/")) {
-       // if (!message.member.hasPermission("ADMINISTRATOR")) {
-            message.delete();
-            message.reply("Divulgação.");
-      //  }
-
-    }
-
-if(cmd === `${prefix}r`) { 
-    if(!message.member.hasPermission("MANAGE_ROLES")) return;
-    let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    if(!rMember) return message.reply("Não foi possível encontrar esse usuário.").then(a=>a.delete(5000));
-    let gRole = message.guild.roles.find(`name`, `💸 Cliente`);
-    let aRole = message.guild.roles.find(`name`, `❌ Não Registrado`);
+    if(cmd === `${prefix}r`) { 
+        if(!message.member.hasPermission("MANAGE_ROLES")) return;
+        let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+        if(!rMember) return message.reply("Não foi possível encontrar esse usuário.").then(a=>a.delete(5000));
+        let gRole = message.guild.roles.find(`name`, `💸 Cliente`);
+        let aRole = message.guild.roles.find(`name`, `❌ Não Registrado`);
   
-    if(rMember.roles.has(gRole.id)) return message.reply("Esse membro já possui um registro.").then(a=>a.delete(5000));
-    await(rMember.addRole(gRole.id));
-    message.channel.send(":white_check_mark:  | Membro registrado com sucesso.").then(a=>a.delete(15000));
-    await(rMember.removeRole(aRole.id));
-    message.delete().catch();
+        if(rMember.roles.has(gRole.id)) return message.reply("Esse membro já possui um registro.").then(a=>a.delete(5000));
+        await(rMember.addRole(gRole.id));
+        message.channel.send(":white_check_mark:  | Membro registrado com sucesso.").then(a=>a.delete(15000));
+        await(rMember.removeRole(aRole.id));
+        message.delete().catch();
   
-    try{
-      await rMember.send(`Parabéns <@${rMember.id}>, você foi registrado com sucesso!`)
-    }catch(e){
-      message.channel.send(` `)
+        try{
+            await rMember.send(`Parabéns <@${rMember.id}>, você foi registrado com sucesso!`)
+        }catch(e){
+            message.channel.send(` `)
+        }
+  
+        return;
     }
-  
-    return;
-  }
 
-  if(cmd === `${prefix}loading`){
-    if(!message.member.hasPermission("ADMINISTRATOR")) return;
-      let embed = new Discord.RichEmbed()
-      .setColor("RED")
-      .setFooter("Aguardando REGISTRO...", "https://i.imgur.com/oWQ1Na3.gif")
-      message.channel.send(embed);
-  }
-  if(cmd === `${prefix}limpar`){
-    if (message.channel.type === "dm") return;
-    if (message.channel.permissionsFor(message.author).has('MANAGE_MESSAGES')) {
+    if(cmd === `${prefix}loading`){
+        if(!message.member.hasPermission("ADMINISTRATOR")) return;
+        let embed = new Discord.RichEmbed()
+        .setColor("RED")
+        .setFooter("Aguardando REGISTRO...", "https://i.imgur.com/oWQ1Na3.gif")
+        message.channel.send(embed);
+    }
+    if(cmd === `${prefix}limpar`){    
+        if (message.channel.type === "dm") return;
+        if (message.channel.permissionsFor(message.author).has('MANAGE_MESSAGES')) {
         if (args.length === 0) {
             return;
         } else if (args.length === 1) {
@@ -90,9 +100,8 @@ if(cmd === `${prefix}r`) {
                 });
                 message.channel.bulkDelete(bulkMessages);
             });
+                }
+            }
         }
-  }
-}
-
-}
+    }
 });
