@@ -29,6 +29,14 @@ bot.on("message", async message => {
     if (message.content == `<@${bot.user.id}>`) {
         message.channel.send("Olá");
     }
+        
+    if (message.content.includes("https://discord.gg/")) {
+        if (!message.member.hasPermission("ADMINISTRATOR")) {
+            message.delete();
+            message.reply("Divulgação.);
+        }
+
+    }
 
 if(cmd === `${prefix}r`) { 
     if(!message.member.hasPermission("MANAGE_ROLES")) return;
