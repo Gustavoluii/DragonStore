@@ -31,10 +31,10 @@ bot.on("message", async message => {
     }
         
     if (message.content.includes("https://discord.gg/")) {
-        if (!message.member.hasPermission("ADMINISTRATOR")) {
+       // if (!message.member.hasPermission("ADMINISTRATOR")) {
             message.delete();
             message.reply("Divulgação.");
-        }
+      //  }
 
     }
 
