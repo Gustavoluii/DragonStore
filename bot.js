@@ -26,7 +26,7 @@ bot.on("message", async message => {
     let cmd = messageArray[0];
     let args = messageArray.slice(1);
 
-    if (message.content == `<@${bot.user.id}>`) {
+    if (message.content === `<@${bot.user.id}>`) {
         message.channel.send("Olá");
     }
         
